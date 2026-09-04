@@ -1,0 +1,76 @@
+name: AI Image Understanding & Content Matching
+
+lane: javascript
+
+description: >
+  An AI-powered backend that understands images, generates semantic
+  embeddings, and matches images to blog posts based on meaning.
+
+stack:
+  language: JavaScript
+  runtime: Node.js
+  framework: Express.js
+  database: PostgreSQL
+  vector_database: pgvector
+  vision_model: gemini-3.6-flash
+  embedding_model: Xenova/all-MiniLM-L6-v2
+  validation: Zod
+  containerization: Docker
+
+features:
+  - Image ingestion
+  - AI image understanding
+  - Structured metadata extraction
+  - Zod schema validation
+  - Semantic embeddings
+  - Vector storage
+  - Cosine similarity matching
+  - Similarity threshold
+  - Mismatch guard
+  - Image suggestions
+  - Suggestion reviews
+  - Evaluation
+
+dataset:
+  total_images: 50
+  categories:
+    fox: 10
+    wolf: 10
+    dog: 10
+    bear: 10
+    deer: 10
+  processed_images: 37
+  unprocessed_images: 13
+  reason: Gemini free-tier quota limit
+
+matching:
+  similarity_metric: cosine_similarity
+  threshold: 0.55
+  vector_dimensions: 384
+  mismatch_guard: true
+
+evaluation:
+  test_posts: 5
+  accepted_suggestions: 15
+  correct_suggestions: 15
+  mismatched_suggestions: 0
+  accepted_suggestion_precision: 1.0
+  mismatch_rate: 0.0
+
+apis:
+  - method: GET
+    path: /health
+  - method: GET
+    path: /api/posts/:id/matches
+  - method: POST
+    path: /api/posts/:id/suggestions
+  - method: POST
+    path: /api/suggestions/:id/reviews
+
+limitations:
+  - Gemini free-tier quota limited batch processing to 37 of 50 images.
+  - Current evaluation dataset is small.
+  - Embeddings are generated from structured image metadata and captions.
+  - Similarity threshold may require further tuning with a larger dataset.
+
+status: complete
